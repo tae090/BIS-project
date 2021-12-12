@@ -5,12 +5,7 @@ ul {
 }
 
 .container {
-  width: 1440px;
   background-color: #f8f8f8;
-  margin: 0 auto;
-  box-sizing: border-box;
-  padding-left: 60px;
-  padding-right: 60px;
 }
 
 .header {
@@ -27,19 +22,40 @@ ul {
   text-align: left;
 }
 
-.header ul {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-}
+@media only screen and (min-width: 1024px) {
+  .header {
+    width: 1440px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding-left: 70px;
+    padding-right: 140px;
+  }
 
-.header ul > li {
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
+  .header ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
 
+  .header ul > li {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: #c4c4c4;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .header li {
+    display: none;
+  }
+  .header {
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
 .profile {
   border-radius: 70%;
 }
