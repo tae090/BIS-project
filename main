@@ -1,0 +1,188 @@
+#include <Wire.h>
+#include <dht.h>
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+int buzzer = 10;//Buzzer pin
+
+//variables for MQ7
+int gas_sensor_7 = A1; //Sensor pin 
+float m_7 = -0.6527; //Slope 
+float b_7 = 1.30; //Y-Intercept 
+float R0_7 = 21.91; //Sensor Resistance in fresh air from previous code
+
+
+//variables for MQ135
+int gas_sensor_135 = A0; //Sensor pin 
+float m_135 = -0.3376; //Slope 
+float b_135 = 0.7165; //Y-Intercept 
+float R0_135 = 3.12; //Sensor Resistance in fresh air from previous code
+
+//variables for MQ2
+#define MQ2pin (2)
+int gas_sensor_2= A2;//Sensor pin
+int sensorValue; //variable to store sensor value
+
+//variables for DHT11
+dht DHT;
+#define DHT11_PIN 7
+ 
+void setup() {
+  pinMode(buzzer, OUTPUT);
+  lcd.begin();
+  lcd.backlight();
+  lcd.setCursor(0,0);
+  lcd.print("MQ2");
+  delay(1000);
+  lcd.setCursor(0,1);
+  lcd.print("WARMING UP!");
+  delay(20000); //allow MQ2 to warm up
+  
+  Serial.begin(9600); //Baud rate 
+ 
+  pinMode(gas_sensor_7, INPUT); //Set gas sensor as input 
+  pinMode(gas_sensor_135, INPUT);
+  
+}
+ 
+void loop() {  
+//sensor variables of MQ135
+  float sensor_volt_135; //Define variable for sensor voltage 
+  float RS_gas_135; //Define variable for sensor resistance  
+  float ratio_135; //Define variable for ratio
+  int sensorValue_135 = analogRead(gas_sensor_135); //Read analog values of sensor  
+
+//obtaining values from MQ135
+  Serial.print("--MQ135's Data--");
+  Serial.print("GAS SENSOR RAW VALUE = ");
+  Serial.println(sensorValue_135);
+  sensor_volt_135 = (sensorValue_135)*(5.0/1023.0); //Convert analog values to voltage 
+  Serial.print("Sensor value in volts = ");
+  Serial.println(sensor_volt_135);
+  RS_gas_135 = ((5.0*10.0)/(sensor_volt_135))-10.0; //Get value of RS in a gas
+  Serial.print("Rs value = ");
+  Serial.println(RS_gas_135);
+  ratio_135 = (RS_gas_135)/(R0_135);  // Get ratio RS_gas/RS_air
+  Serial.print("Ratio = ");
+  Serial.println(ratio_135);
+  double ppm_log_135 = (log10(ratio_135)-(b_135))/(m_135); //Get ppm value in linear scale according to the the ratio value  
+  double ppm_135 = pow(10, (ppm_log_135)); //Convert ppm value to log scale 
+  Serial.print("The gas's PPM = ");
+  Serial.println(ppm_135);
+  double percentage_135 = (ppm_135)/10000; //Convert to percentage 
+  Serial.print("Value in Percentage = "); //Load screen buffer with percentage value
+  Serial.println(percentage_135); 
+  lcd.setCursor(0,0);
+  lcd.print("--MQ135's Data--");
+  lcd.setCursor(0,1);
+  lcd.print("Value in % ="); 
+  lcd.print(percentage_135);
+  if ((ppm_135) > 50) { //when the ppm is higher than 50 it's unsafe
+    lcd.setCursor(0,1);
+    lcd.print("Warning!");
+    tone(buzzer, 500, 2000);
+  }
+  else {
+    lcd.setCursor(0,1);
+    lcd.print("Good Air Quality");
+  }
+  
+  delay(5000);
+
+ 
+//sensor variables of MQ7
+float sensor_volt_7; //Define variable for sensor voltage 
+  float RS_gas_7; //Define variable for sensor resistance  
+  float ratio_7; //Define variable for ratio
+  int sensorValue_7 = analogRead(gas_sensor_7); //Read analog values of sensor  
+
+//obtaining values from MQ7
+  Serial.print("--MQ7's Data--");
+  Serial.print("GAS SENSOR RAW VALUE = ");
+  Serial.println(sensorValue_7);
+  sensor_volt_7 = (sensorValue_7)*(5.0/1023.0); //Convert analog values to voltage 
+  Serial.print("Sensor value in volts = ");
+  Serial.println(sensor_volt_7);
+  RS_gas_7 = ((5.0*10.0)/(sensor_volt_7))-10.0; //Get value of RS in a gas
+  Serial.print("Rs value = ");
+  Serial.println(RS_gas_7);
+  ratio_7 = (RS_gas_7)/(R0_7);  // Get ratio RS_gas/RS_air
+  Serial.print("Ratio = ");
+  Serial.println(ratio_7);
+  double ppm_log_7 = (log10(ratio_7)-(b_7))/(m_7); //Get ppm value in linear scale according to the the ratio value  
+  double ppm_7 = pow(10, (ppm_log_7)); //Convert ppm value to log scale 
+  Serial.print("The gas's PPM = ");
+  Serial.println(ppm_7);
+  double percentage_7 = (ppm_7)/10000; //Convert to percentage 
+  Serial.print("Value in %= "); //Load screen buffer with percentage value
+  Serial.println(percentage_7); 
+  lcd.setCursor(0,0);
+  lcd.print("--MQ7's Data--");
+  lcd.setCursor(0,1);
+  lcd.print("Value in %="); 
+  lcd.print(percentage_7);
+  if ((ppm_7) > 50) { //when the ppm is higher than 50 it's unsafe
+    lcd.setCursor(0,1);
+    lcd.print("Warning!High CO");
+    tone(buzzer, 500, 2000);
+  }
+  else {
+    lcd.setCursor(0,1);
+    lcd.print("Good Air Quality");
+  }
+  
+  delay(5000);
+
+//sensor variables for MQ2
+  sensorValue = analogRead(MQ2pin); // read analog input pin 2  
+
+//obtaining values for MQ2
+  Serial.print("--MQ2's Data--");
+  Serial.print("Smoke's ppm:");
+  Serial.print(sensorValue);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("--MQ2's Data--");
+  lcd.setCursor(0,1);
+  lcd.print("Smoke's ppm: ");
+  lcd.print(sensorValue);
+  if(sensorValue > 300)
+  {
+    lcd.setCursor(0,1);
+    lcd.print("SMOKE DETECTED");
+    tone(buzzer, 500, 2000);
+  }
+  else
+  {
+    lcd.setCursor(0,1);
+    lcd.print("NO SMOKE");
+    noTone(buzzer);
+  }
+  delay(5000); // wait 5s for next reading
+
+//obtaining values for DHT11
+  int sz = DHT.read11(DHT11_PIN);
+  Serial.print("Temp: ");
+  Serial.print(DHT.temperature);
+  Serial.print("C");
+  Serial.print("   ");
+  //--------------------------
+  Serial.print("Humidity: ");
+  Serial.print(DHT.humidity);
+  Serial.println("%");
+  delay(5000);
+  //--------------------------
+  Serial.println("===========================");
+  
+  lcd.clear;
+  lcd.setCursor(0,0);
+  lcd.print("Temp:");
+  lcd.print(DHT.temperature);
+  lcd.print("C");
+  lcd.setCursor(0,1);
+  lcd.print("Humidity ");
+  lcd.print(DHT.humidity);
+  lcd.print("%");
+  delay(5000);
+  
+}
