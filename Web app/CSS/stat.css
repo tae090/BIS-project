@@ -1,9 +1,10 @@
 .flex_container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   flex-basis: auto;
   height: auto;
+  justify-content: space-between;
 }
 .box {
   box-shadow: 0 0 20px 0 #e5e5e5;
