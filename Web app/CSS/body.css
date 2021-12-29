@@ -22,9 +22,22 @@ body {
   margin: 7%;
   margin-top: 5%;
 }
-.iqa_mobile {
-  display: none;
+
+@media only screen and (min-width: 768px) {
+  .iqa_mobile {
+    display: none;
+  }
+
+  hr {
+    color: #e5e5e5;
+    align-self: center;
+    width: 80%;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.5);
+    margin-bottom: 5%;
+    margin-top: 5%;
+  }
 }
+
 .flex-container {
   display: flex;
   flex-direction: row, column;
@@ -106,7 +119,7 @@ body {
   font-family: "Noto Sans", sans-serif;
 }
 
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 425px) {
   .iqa_mobile {
     box-shadow: 0 0 20px 0 #e5e5e5;
     background-color: white;
@@ -159,13 +172,13 @@ body {
   .box_4 > p {
     padding-left: 10%;
   }
-}
 
-hr {
-  color: #e5e5e5;
-  align-self: center;
-  width: 80%;
-  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.5);
-  margin-bottom: 5%;
-  margin-top: 5%;
+  hr {
+    color: #e5e5e5;
+    align-self: center;
+    width: 80%;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.5);
+    margin-bottom: 10%;
+    margin-top: 10%;
+  }
 }
