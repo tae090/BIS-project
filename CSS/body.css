@@ -108,9 +108,12 @@ body {
   padding-left: 10%;
   text-align: left;
 }
+.box_1 > iframe {
+  text-align: left;
+}
 .box_1 > p {
   font-size: 300%;
-  text-align: center;
+  text-align: right;
   font-family: "Noto Sans", sans-serif;
   margin: 0;
 }
