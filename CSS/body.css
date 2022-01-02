@@ -83,7 +83,7 @@ body {
   box-shadow: 0 0 20px 0 #e5e5e5;
   background-color: white;
   font-weight: 900;
-  padding-right: 2%;
+  padding-right: 3%;
   padding-left: 3%;
   border-radius: 20px;
   margin: 0.5%;
@@ -94,6 +94,8 @@ body {
   font-weight: 900;
   /* padding: 1%; */
   padding-left: 3%;
+  padding-right: 3%;
+
   border-radius: 20px;
   width: 23%;
   margin: 0.5%;
@@ -104,21 +106,14 @@ body {
   padding-left: 10%;
   padding-top: 1%;
   text-align: left;
+  margin-bottom: 0%;
 }
 .box_2 > h3 {
   padding-left: 10%;
   padding-top: 1%;
   text-align: left;
 }
-.box_1 > iframe {
-  text-align: left;
-}
-.box_1 > p {
-  font-size: 300%;
-  text-align: right;
-  font-family: "Noto Sans", sans-serif;
-  margin: 0;
-}
+
 .box_2 > p {
   font-size: 300%;
   text-align: center;
@@ -136,8 +131,29 @@ body {
   margin: 0;
 }
 .box_4 > p {
-  margin: 0;
+  margin-top: 10%;
 }
+
+iframe {
+  border: none;
+  display: block;
+}
+
+.temp {
+  display: flex;
+  flex-direction: row;
+  margin: 5%;
+  margin-top: 0%;
+  justify-content: space-between;
+  padding-bottom: 3%;
+}
+.temp > p {
+  font-size: 300%;
+  padding-right: 10%;
+  margin-top: 35%;
+}
+
+/* Mobile */
 
 @media only screen and (max-width: 425px) {
   .iqa_mobile {
@@ -146,13 +162,16 @@ body {
     font-weight: 900;
     border-radius: 20px;
     margin: 0.5%;
-    margin-bottom: 0%;
+    margin-bottom: 2%;
+    height: 500px;
   }
   .iqa_mobile > h3 {
     font-family: "Noto Sans", sans-serif;
     padding: 5%;
     padding-left: 6%;
+    padding-bottom: 0%;
     text-align: left;
+    margin-bottom: 0%;
   }
 
   .box_3 {
@@ -169,6 +188,7 @@ body {
   .col {
     display: flexbox;
     width: 25%;
+    margin: 0%;
   }
 
   .box_1 {
@@ -191,7 +211,8 @@ body {
     padding-top: 1%;
   }
   .box_4 > p {
-    padding-left: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
   }
 
   hr {
@@ -202,9 +223,7 @@ body {
     margin-bottom: 10%;
     margin-top: 10%;
   }
-}
-
-iframe {
-  border: none;
-  width: 70%;
+  .box_4 > p {
+    margin-top: 5%;
+  }
 }

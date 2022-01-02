@@ -60,40 +60,58 @@
     <div class="container">
       <h1>Home</h1>
       <h3>Current Status</h3>
-      <div class="iqa_mobile"><h3>IAQ</h3></div>
+
+      <div class="iqa_mobile">
+        <h3>IAQ</h3>
+        <iframe
+          width="100%"
+          height="80%"
+          src="https://thingspeak.com/channels/1562319/widgets/403340"
+        ></iframe>
+      </div>
 
       <div class="flex-container">
         <div class="col">
           <div class="box_1">
             <h3>Temperature</h3>
-            <iframe
-              src="https://thingspeak.com/channels/1562319/widgets/402794"
-            ></iframe>
-            <p>°C</p>
+            <div class="temp">
+              <iframe
+                width="70%"
+                src="https://thingspeak.com/channels/1562319/widgets/402794"
+              ></iframe>
+              <p>°C</p>
+            </div>
           </div>
           <div class="box_2">
             <h3>Humidity</h3>
-            <!-- <p> -->
-            <iframe
-              src="https://thingspeak.com/channels/1562319/widgets/403339"
-            ></iframe>
-            <!-- </p> -->
+            <div class="temp">
+              <iframe
+                width="70%"
+                src="https://thingspeak.com/channels/1562319/widgets/403339"
+              ></iframe>
+              <p>%</p>
+            </div>
           </div>
         </div>
         <div class="box_3" style="flex-grow: 1">
           <h3>IAQ</h3>
-          <p>
-            <iframe
-              src="https://thingspeak.com/channels/1562319/widgets/403340"
-            ></iframe>
-          </p>
+          <iframe
+            width="100%"
+            height="50%"
+            src="https://thingspeak.com/channels/1562319/widgets/403340"
+          ></iframe>
+          <p>blabla</p>
         </div>
         <div class="box_4">
           <h3>Smoke Alert</h3>
+          <iframe
+            width="100%"
+            height="50%"
+            src="https://thingspeak.com/channels/1562319/widgets/403341"
+          ></iframe>
           <p>
-            <iframe
-              src="https://thingspeak.com/channels/1562319/widgets/403341"
-            ></iframe>
+            *If LPG, Smoke, Alcohol, Propane, Hydrogen, Methane and Carbon
+            Monoxide concentrations over 200ppm, it gives warning
           </p>
         </div>
       </div>
