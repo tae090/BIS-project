@@ -23,6 +23,9 @@
 
 iframe {
   margin-right: 5%;
+  width: 100%;
+
+  height: 80%;
 }
 
 .box > p {
