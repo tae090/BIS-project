@@ -63,11 +63,33 @@
 
       <div class="iqa_mobile">
         <h3>IAQ</h3>
+        <div class="current_location">
+          <h3 >Current Locationㅤ</h3> 
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 0 24 24"
+            width="24px"
+            fill="#000000"
+          >
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"
+            />
+          </svg>
+        </div>
+          <p>Indoor Air Quality</p>
         <iframe
           width="100%"
           height="80%"
           src="https://thingspeak.com/channels/1562319/widgets/403340"
         ></iframe>
+        <p>
+          <br>*0-400 ppm: Healthy. 
+            <br> 400-600 ppm: Good. 
+            <br> 600-1000 ppm: Moderate. 
+            <br>1000- ppm: Bad.
+        </p>
       </div>
 
       <div class="flex-container">
@@ -87,22 +109,45 @@
             <div class="temp">
               <iframe
                 width="70%"
-                src="https://thingspeak.com/channels/1562319/widgets/403339"
+                src="https://thingspeak.com/channels/1562319/widgets/404538"
               ></iframe>
               <p>%</p>
             </div>
           </div>
         </div>
         <div class="box_3" style="flex-grow: 1">
+          <div class="iaq_title">
           <h3>IAQ</h3>
+          <div class="current_location">
+          <p >Current Locationㅤ</p> 
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 0 24 24"
+            width="24px"
+            fill="#000000"
+          >
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"
+            />
+          </svg></div>
+        </div>
           <p>Indoor Air Quality</p>
+        
 
           <iframe
             width="100%"
             height="50%"
             src="https://thingspeak.com/channels/1562319/widgets/403340"
           ></iframe>
-          <p>blabla</p>
+          <p class="iaq_p">
+            <br>*0-400 ppm: Healthy. Fresh air, perfect conditions.
+            <br> 400-600 ppm: Good. Equivalent to normal outdoor environment.
+            <br> 600-1000 ppm: Moderate. Acceptable. Ventilation recommended.
+            <br>1000- ppm: Bad. Contaminated indoor air. Ventilation required.
+
+          </p>
         </div>
         <div class="box_4">
           <h3>Smoke Alert</h3>
@@ -139,7 +184,7 @@
           ></iframe></p>
         </div>
         <div class="box">
-          <h3>MQ2</h3>
+          <h3>Combustible Gas (H2, LPG, CH4, Alcohol, Propane)</h3>
         <p><iframe 
           width="100%"
           height="70%"
@@ -158,7 +203,7 @@
       <p><iframe 
       width="100%"
       height="70%"
-      src="https://thingspeak.com/channels/1562319/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Humidity&type=line"></iframe>
+      src="https://thingspeak.com/channels/1562319/charts/6?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
   </div></p>
       <br />
     </div>

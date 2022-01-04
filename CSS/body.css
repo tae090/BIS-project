@@ -130,6 +130,7 @@ body {
 }
 .box_3 > p {
   margin: 0;
+  font-size: 115%;
 }
 .box_4 > p {
   margin-top: 10%;
@@ -227,4 +228,30 @@ iframe {
   .box_4 > p {
     margin-top: 5%;
   }
+}
+
+.iaq_title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 1%;
+}
+.current_location {
+  display: flex;
+  flex-direction: row;
+  text-align: end;
+  vertical-align: text-bottom;
+  padding-bottom: 0%;
+}
+.current_location > svg {
+  margin-top: 12%;
+}
+.iaq_title > p {
+  margin-bottom: 3%;
+}
+.current_location > p {
+  margin-top: 14%;
+}
+.iaq_p {
+  margin-bottom: 0%;
 }
