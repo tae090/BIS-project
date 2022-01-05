@@ -255,3 +255,14 @@ iframe {
 .iaq_p {
   margin-bottom: 0%;
 }
+table {
+  border: 1px solid #444444;
+  border-collapse: collapse;
+  margin-right: 0px;
+  text-align: center;
+}
+th,
+td {
+  border: 1px solid #444444;
+  padding: 1%;
+}
