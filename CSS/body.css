@@ -163,22 +163,60 @@ iframe {
     background-color: white;
     font-weight: 900;
     border-radius: 20px;
-    margin: 0.5%;
-    margin-bottom: 2%;
+    margin-bottom: 3%;
     height: 500px;
   }
   .iqa_mobile > h3 {
-    font-family: "Noto Sans", sans-serif;
-    padding: 5%;
-    padding-left: 6%;
-    padding-bottom: 0%;
+    padding-left: 10%;
+    padding-top: 1%;
     text-align: left;
     margin-bottom: 0%;
   }
-
+  .iqa_mobile > p {
+    margin-left: 5%;
+    margin-top: 0%;
+    margin-right: 0%;
+    margin-bottom: 0%;
+    padding-left: 1%;
+  }
+  .iqa_title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 1%;
+    margin: 5%;
+    margin-bottom: 0%;
+  }
+  .iqa_title {
+    padding-left: 1%;
+  }
+  .current_lo {
+    display: flex;
+    flex-direction: row;
+    text-align: end;
+    vertical-align: text-bottom;
+    padding-bottom: 0%;
+    font-size: 80%;
+    font-weight: normal;
+    padding-top: 2%;
+  }
+  .current_lo > svg {
+    margin-top: 10%;
+  }
+  .iqa_mobile > iframe {
+    height: 250px;
+    width: 100%;
+  }
   .box_3 {
     display: none;
   }
+  /* .p {
+    align-content: center;
+    text-align: center;
+  } */
+
+  /* below IAQ */
+
   .flex-container {
     display: flex;
     flex-direction: row, column;
@@ -194,12 +232,12 @@ iframe {
   }
 
   .box_1 {
-    width: 190%;
+    width: 181%;
     height: min-content;
-    margin-bottom: 10%;
+    margin-bottom: 11%;
   }
   .box_2 {
-    width: 190%;
+    width: 181%;
   }
 
   .box_4 {
