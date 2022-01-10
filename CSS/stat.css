@@ -27,8 +27,11 @@ p {
   border-radius: 20px;
   margin: 0.5%;
   height: 330px;
-  width: 48.5%;
+  width: 45%;
   margin-bottom: 1.5%;
+}
+.responsive-iframe {
+  position: sticky;
 }
 .box > h3 {
   padding-right: 5%;
@@ -38,7 +41,7 @@ p {
 .box > p {
   text-align: center;
   height: 100%;
-  margin-left: 10%;
+  margin-left: 20%;
   margin-right: 10%;
 }
 @media only screen and (max-width: 768px) {
