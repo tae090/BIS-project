@@ -179,7 +179,7 @@ float sensor_volt_7; //Define variable for sensor voltage
   else
   {
     lcd.setCursor(0,1);
-    lcd.print("NO SMOKE");
+    lcd.print("NO COMBUSTIBLE GAS DETECTED");
     noTone(buzzer);
   }
   delay(5000); // wait 5s for next reading
