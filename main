@@ -1,8 +1,23 @@
 #include <Wire.h>
 #include <dht.h>
+#include <WiFiNINA.h>
+#include "ThingSpeak.h"
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 16, 2);
+WiFiClient  client;
+char ssid[] = "Thu 2.4Ghz";                // your network SSID (name)
+char pass[] = "thu344346";    // your network password (use for WPA, or use as key for WEP)
+int status = WL_IDLE_STATUS;  
 
+unsigned long Channel_ID = 1562319; // Your Channel ID
+const char * myWriteAPIKey = "WED4L8OB5E8WEMO5"; //Your write API key
+
+const int Field_Number_1 = 1;
+const int Field_Number_2 = 2;
+const int Field_Number_3 = 3;
+const int Field_Number_4 = 4;
+const int Field_Number_5 = 5;
+const int Field_Number_6 = 6;
 int buzzer = 10;//Buzzer pin
 
 //variables for MQ7
@@ -26,10 +41,28 @@ int sensorValue; //variable to store sensor value
 //variables for DHT11
 dht DHT;
 #define DHT11_PIN 7
+
  
 void setup() {
+  while (status != WL_CONNECTED) {
+    Serial.print("Attempting to connect to network: ");
+    Serial.println(ssid);
+    // Connect to WPA/WPA2 network:
+    status = WiFi.begin(ssid, pass);
+
+    // wait 10 seconds for connection:
+    delay(10000);
+  }
+
+
+
+  // you're connected now, so print out the data:
+  Serial.println("You're connected to the network");
+  Serial.println("---------------------------------------");
+
+  ThingSpeak.begin(client);
   pinMode(buzzer, OUTPUT);
-  lcd.begin();
+  lcd.init();
   lcd.backlight();
   lcd.setCursor(0,0);
   lcd.print("MQ2");
@@ -51,33 +84,20 @@ void loop() {
   float RS_gas_135; //Define variable for sensor resistance  
   float ratio_135; //Define variable for ratio
   int sensorValue_135 = analogRead(gas_sensor_135); //Read analog values of sensor  
+  float x= ThingSpeak.writeField(Channel_ID, 3, sensorValue_135, myWriteAPIKey);
+  
+
 
 //obtaining values from MQ135
-  Serial.print("--MQ135's Data--");
+  Serial.println("--MQ135's Data--");
   Serial.print("GAS SENSOR RAW VALUE = ");
   Serial.println(sensorValue_135);
-  sensor_volt_135 = (sensorValue_135)*(5.0/1023.0); //Convert analog values to voltage 
-  Serial.print("Sensor value in volts = ");
-  Serial.println(sensor_volt_135);
-  RS_gas_135 = ((5.0*10.0)/(sensor_volt_135))-10.0; //Get value of RS in a gas
-  Serial.print("Rs value = ");
-  Serial.println(RS_gas_135);
-  ratio_135 = (RS_gas_135)/(R0_135);  // Get ratio RS_gas/RS_air
-  Serial.print("Ratio = ");
-  Serial.println(ratio_135);
-  double ppm_log_135 = (log10(ratio_135)-(b_135))/(m_135); //Get ppm value in linear scale according to the the ratio value  
-  double ppm_135 = pow(10, (ppm_log_135)); //Convert ppm value to log scale 
-  Serial.print("The gas's PPM = ");
-  Serial.println(ppm_135);
-  double percentage_135 = (ppm_135)/10000; //Convert to percentage 
-  Serial.print("Value in Percentage = "); //Load screen buffer with percentage value
-  Serial.println(percentage_135); 
   lcd.setCursor(0,0);
   lcd.print("--MQ135's Data--");
   lcd.setCursor(0,1);
   lcd.print("Value in % ="); 
   lcd.print(percentage_135);
-  if ((ppm_135) > 50) { //when the ppm is higher than 50 it's unsafe
+  if ((sensorValue_135) > 250) { //when the ppm is higher than 250 it's unsafe
     lcd.setCursor(0,1);
     lcd.print("Warning!");
     tone(buzzer, 500, 2000);
@@ -95,9 +115,11 @@ float sensor_volt_7; //Define variable for sensor voltage
   float RS_gas_7; //Define variable for sensor resistance  
   float ratio_7; //Define variable for ratio
   int sensorValue_7 = analogRead(gas_sensor_7); //Read analog values of sensor  
+  float q= ThingSpeak.writeField(Channel_ID, 5, sensorValue_7, myWriteAPIKey);
 
+  
 //obtaining values from MQ7
-  Serial.print("--MQ7's Data--");
+  Serial.println("--MQ7's Data--");
   Serial.print("GAS SENSOR RAW VALUE = ");
   Serial.println(sensorValue_7);
   sensor_volt_7 = (sensorValue_7)*(5.0/1023.0); //Convert analog values to voltage 
@@ -135,21 +157,23 @@ float sensor_volt_7; //Define variable for sensor voltage
 
 //sensor variables for MQ2
   sensorValue = analogRead(MQ2pin); // read analog input pin 2  
+  float b= ThingSpeak.writeField(Channel_ID, 4, sensorValue, myWriteAPIKey);
+
 
 //obtaining values for MQ2
-  Serial.print("--MQ2's Data--");
-  Serial.print("Smoke's ppm:");
-  Serial.print(sensorValue);
+  Serial.println("--MQ2's Data--");
+  Serial.print("Combustile gases' ppm:");
+  Serial.println(sensorValue);
   lcd.clear();
   lcd.setCursor(0,0);
   lcd.print("--MQ2's Data--");
   lcd.setCursor(0,1);
-  lcd.print("Smoke's ppm: ");
+  lcd.print("Combustile gases' ppm: ");
   lcd.print(sensorValue);
   if(sensorValue > 200)
   {
     lcd.setCursor(0,1);
-    lcd.print("SMOKE DETECTED");
+    lcd.print("COMBUSTILE GAS DETECTED");
     tone(buzzer, 500, 2000);
   }
   else
@@ -162,6 +186,7 @@ float sensor_volt_7; //Define variable for sensor voltage
 
 //obtaining values for DHT11
   int sz = DHT.read11(DHT11_PIN);
+  Serial.println("--DHT11--");
   Serial.print("Temp: ");
   Serial.print(DHT.temperature);
   Serial.print("C");
@@ -173,16 +198,22 @@ float sensor_volt_7; //Define variable for sensor voltage
   delay(5000);
   //--------------------------
   Serial.println("===========================");
-  
-  lcd.clear;
+ float y = DHT.temperature;
+ float e = DHT.humidity;
+ 
+ float r= ThingSpeak.writeField(Channel_ID, 1, y, myWriteAPIKey);
+ 
+ float z= ThingSpeak.writeField(Channel_ID, 6, e, myWriteAPIKey);
+ 
+
   lcd.setCursor(0,0);
   lcd.print("Temp:");
   lcd.print(DHT.temperature);
-  lcd.print("C");
+  lcd.print("C"); 
   lcd.setCursor(0,1);
   lcd.print("Humidity ");
   lcd.print(DHT.humidity);
   lcd.print("%");
   delay(5000);
-  
+
 }
