@@ -95,8 +95,6 @@ void loop() {
   lcd.setCursor(0,0);
   lcd.print("--MQ135's Data--");
   lcd.setCursor(0,1);
-  lcd.print("Value in % ="); 
-  lcd.print(percentage_135);
   if ((sensorValue_135) > 250) { //when the ppm is higher than 250 it's unsafe
     lcd.setCursor(0,1);
     lcd.print("Warning!");
@@ -173,13 +171,13 @@ float sensor_volt_7; //Define variable for sensor voltage
   if(sensorValue > 200)
   {
     lcd.setCursor(0,1);
-    lcd.print("COMBUSTILE GAS DETECTED");
+    lcd.print("COMBUSTIBLE GAS DETECTED");
     tone(buzzer, 500, 2000);
   }
   else
   {
     lcd.setCursor(0,1);
-    lcd.print("NO COMBUSTIBLE GAS DETECTED");
+    lcd.print("NO COMBUSTIBLE GAS");
     noTone(buzzer);
   }
   delay(5000); // wait 5s for next reading
