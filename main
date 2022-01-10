@@ -146,7 +146,7 @@ float sensor_volt_7; //Define variable for sensor voltage
   lcd.setCursor(0,1);
   lcd.print("Smoke's ppm: ");
   lcd.print(sensorValue);
-  if(sensorValue > 300)
+  if(sensorValue > 200)
   {
     lcd.setCursor(0,1);
     lcd.print("SMOKE DETECTED");
