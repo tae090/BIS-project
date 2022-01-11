@@ -25,10 +25,6 @@ body {
 }
 
 @media only screen and (min-width: 768px) {
-  .iqa_mobile {
-    display: none;
-  }
-
   hr {
     color: #e5e5e5;
     align-self: center;
@@ -142,12 +138,17 @@ iframe {
   border: none;
   display: block;
 }
-
+@media only screen and (min-width: 769px) {
+  .iqa_mobile {
+    display: none;
+  }
+}
 .temp {
   display: flex;
   flex-direction: row;
   margin: 5%;
   margin-top: 0%;
+  margin-left: 0%;
   justify-content: space-between;
   padding-bottom: 3%;
 }
@@ -158,15 +159,20 @@ iframe {
 }
 
 /* Mobile */
-
 @media only screen and (max-width: 425px) {
+  .box_4 > p {
+    font-size: small;
+  }
+}
+
+@media only screen and (max-width: 768px) {
   .iqa_mobile {
     box-shadow: 0 0 20px 0 #e5e5e5;
     background-color: white;
     font-weight: 900;
     border-radius: 20px;
     margin-bottom: 3%;
-    height: 500px;
+    height: 620px;
   }
   .iqa_mobile > h3 {
     padding-left: 10%;
@@ -206,7 +212,7 @@ iframe {
     margin-top: 10%;
   }
   .iqa_mobile > iframe {
-    height: 250px;
+    height: 270px;
     width: 100%;
   }
   .box_3 {
@@ -247,7 +253,7 @@ iframe {
   .box_4 {
     margin-top: auto;
     width: 45%;
-    min-height: 100%;
+    min-height: 110%;
     margin: 0%;
   }
   .box_4 > h3 {
@@ -257,6 +263,7 @@ iframe {
   .box_4 > p {
     padding-left: 5%;
     padding-right: 5%;
+    margin-top: 5%;
   }
 
   hr {
@@ -267,8 +274,8 @@ iframe {
     margin-bottom: 10%;
     margin-top: 10%;
   }
-  .box_4 > p {
-    margin-top: 5%;
+  .box_4 > iframe {
+    height: 47.5%;
   }
 }
 
