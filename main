@@ -12,12 +12,17 @@ int status = WL_IDLE_STATUS;
 unsigned long Channel_ID = 1562319; // Your Channel ID
 const char * myWriteAPIKey = "WED4L8OB5E8WEMO5"; //Your write API key
 
+unsigned long Channel_ID1 = 1630063; // Your Channel ID
+const char * myWriteAPIKey1 = "ZURRBILN6PNOB97J"; //Your write API key
+
 const int Field_Number_1 = 1;
 const int Field_Number_2 = 2;
 const int Field_Number_3 = 3;
 const int Field_Number_4 = 4;
-const int Field_Number_5 = 5;
-const int Field_Number_6 = 6;
+
+const int Field_Number_7 = 7;
+const int Field_Number_8 = 8;
+
 int buzzer = 10;//Buzzer pin
 
 //variables for MQ7
@@ -113,7 +118,7 @@ float sensor_volt_7; //Define variable for sensor voltage
   float RS_gas_7; //Define variable for sensor resistance  
   float ratio_7; //Define variable for ratio
   int sensorValue_7 = analogRead(gas_sensor_7); //Read analog values of sensor  
-  float q= ThingSpeak.writeField(Channel_ID, 5, sensorValue_7, myWriteAPIKey);
+  float q= ThingSpeak.writeField(Channel_ID1, 7, sensorValue_7, myWriteAPIKey1);
 
   
 //obtaining values from MQ7
@@ -171,13 +176,13 @@ float sensor_volt_7; //Define variable for sensor voltage
   if(sensorValue > 200)
   {
     lcd.setCursor(0,1);
-    lcd.print("COMBUSTIBLE GAS DETECTED");
+    lcd.print("COMBUSTILE GAS DETECTED");
     tone(buzzer, 500, 2000);
   }
   else
   {
     lcd.setCursor(0,1);
-    lcd.print("NO COMBUSTIBLE GAS");
+    lcd.print("NO SMOKE");
     noTone(buzzer);
   }
   delay(5000); // wait 5s for next reading
@@ -201,7 +206,7 @@ float sensor_volt_7; //Define variable for sensor voltage
  
  float r= ThingSpeak.writeField(Channel_ID, 1, y, myWriteAPIKey);
  
- float z= ThingSpeak.writeField(Channel_ID, 6, e, myWriteAPIKey);
+ float z= ThingSpeak.writeField(Channel_ID1, 8, e, myWriteAPIKey1);
  
 
   lcd.setCursor(0,0);
